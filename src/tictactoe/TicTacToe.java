@@ -37,7 +37,7 @@ public class TicTacToe {
             col = (slot - 1) % 3;
         } while (!isValidMove(row, col));
 
-        System.out.println("Computer selected slot: " + slot);
+        System.out.println("Computer selected slot number: " + slot);
         placeMove(row, col, 'O');
     }
 
