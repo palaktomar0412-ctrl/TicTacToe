@@ -1,15 +1,14 @@
-import java.util.Random;
+package tictactoe;
+import java.util.Scanner;
 
 public class TicTacToe {
     public static void main(String[] args) {
 
-        Random rand = new Random();
-        int toss = rand.nextInt(2);
+        Scanner sc = new Scanner(System.in);
 
-        if (toss == 0) {
-            System.out.println("Player starts with X- updated");
-        } else {
-            System.out.println("Computer starts with X");
-        }
+        System.out.print("Enter slot (1-9): ");
+        int slot = sc.nextInt();
+
+        System.out.println("You entered: " + slot);
     }
 }
