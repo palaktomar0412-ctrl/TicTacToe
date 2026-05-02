@@ -1,13 +1,11 @@
 package tictactoe;
 
-import java.util.Random;
-
 public class TicTacToe {
 
     static char[][] board = {
-        {'X', 'X', 'X'},
-        {'-', '-', '-'},
-        {'-', '-', 'O'}
+        {'X', 'O', 'X'},
+        {'X', 'O', 'O'},
+        {'O', 'X', 'X'}
     };
 
     public static void displayBoard() {
@@ -19,31 +17,8 @@ public class TicTacToe {
         }
     }
 
-    public static boolean isValidMove(int row, int col) {
-        return board[row][col] == '-';
-    }
-
-    public static void placeMove(int row, int col, char symbol) {
-        board[row][col] = symbol;
-    }
-
-    public static void computerRandomMove() {
-        Random rand = new Random();
-        int slot, row, col;
-
-        do {
-            slot = rand.nextInt(9) + 1;
-            row = (slot - 1) / 3;
-            col = (slot - 1) % 3;
-        } while (!isValidMove(row, col));
-
-        System.out.println("Computer selected slot: " + slot);
-        placeMove(row, col, 'O');
-    }
-
     public static boolean checkWin(char symbol) {
 
-        // rows
         for (int i = 0; i < 3; i++) {
             if (board[i][0] == symbol &&
                 board[i][1] == symbol &&
@@ -52,7 +27,6 @@ public class TicTacToe {
             }
         }
 
-        // columns
         for (int j = 0; j < 3; j++) {
             if (board[0][j] == symbol &&
                 board[1][j] == symbol &&
@@ -61,17 +35,32 @@ public class TicTacToe {
             }
         }
 
-        // diagonal 1
         if (board[0][0] == symbol &&
             board[1][1] == symbol &&
             board[2][2] == symbol) {
             return true;
         }
 
-        // diagonal 2
         if (board[0][2] == symbol &&
             board[1][1] == symbol &&
             board[2][0] == symbol) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkDraw() {
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '-') {
+                    return false;
+                }
+            }
+        }
+
+        if (!checkWin('X') && !checkWin('O')) {
             return true;
         }
 
@@ -89,8 +78,11 @@ public class TicTacToe {
         else if (checkWin('O')) {
             System.out.println("O wins!");
         }
+        else if (checkDraw()) {
+            System.out.println("Game Draw!");
+        }
         else {
-            System.out.println("No winner yet.");
+            System.out.println("Game still running.");
         }
     }
 }
